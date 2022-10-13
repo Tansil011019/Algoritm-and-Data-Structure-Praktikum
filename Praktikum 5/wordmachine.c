@@ -9,7 +9,7 @@
 // #include "charmachine.c"
 #include "wordmachine.h"
 
-boolean EndWord;
+boolean endWord;
 Word currentWord;
 
 void IgnoreBlanks(){
@@ -25,9 +25,9 @@ void STARTWORD(){
     START();
     IgnoreBlanks();
     if(currentChar == MARK){
-        EndWord = true;
+        endWord = true;
     }else{
-        EndWord = false;
+        endWord = false;
         CopyWord();
     }
 }
@@ -39,7 +39,7 @@ void STARTWORD(){
 void ADVWORD(){
     IgnoreBlanks();
     if(currentChar == MARK){
-        EndWord = true;
+        endWord = true;
     }else{
         CopyWord();
         IgnoreBlanks();
@@ -66,3 +66,15 @@ void CopyWord(){
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+void LowerCase(){
+    for(int i= 0; i<currentWord.Length; i++){
+        if(currentWord.TabWord[i]>=65 && currentWord.TabWord[i]<=90){
+            currentWord.TabWord[i]+=32;
+        }
+    }
+}
+
+/* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
+
+/* F.S. currentword menjadi lowercase di setiap karakternya */

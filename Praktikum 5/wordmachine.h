@@ -17,7 +17,7 @@ typedef struct
 } Word;
 
 /* State Mesin Word */
-extern boolean EndWord;
+extern boolean endWord;
 extern Word currentWord;
 
 void IgnoreBlanks();
@@ -46,4 +46,9 @@ void CopyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+void LowerCase();
+
+/* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
+
+/* F.S. currentword menjadi lowercase di setiap karakternya */
 #endif
