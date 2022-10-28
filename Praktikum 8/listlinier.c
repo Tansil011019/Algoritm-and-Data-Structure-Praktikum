@@ -260,3 +260,129 @@ List concat(List l1, List l2) {
 /* Konkatenasi dua buah list : l1 dan l2    */
 /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
+
+/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
+boolean fSearch(List L, Address P){
+    Address p= FIRST(L);
+    boolean found= false;
+    while(p!=NULL && !found){
+        if(p == P){
+            found= true;
+        }
+        p= NEXT(p);
+    }
+    return found;
+}
+/* Mencari apakah ada elemen list yang beralamat P */
+/* Mengirimkan true jika ada, false jika tidak ada */
+Address searchPrec(List L, ElType X){
+    Address p= FIRST(L);
+    Address loc= NULL;
+    boolean found= false;
+    while(p != NULL && !found){
+        if(INFO(p) == X){
+            found= true;
+        }else{
+            loc= p;
+            p= NEXT(p);
+        }
+    }
+    if(found){
+        return loc;
+    }else{
+        return NULL;
+    }
+}
+/* Mengirimkan address elemen sebelum elemen yang nilainya=X */
+/* Mencari apakah ada elemen list dengan Info(P)=X */
+/* Jika ada, mengirimkan address Prec, dengan Next(Prec)=P dan Info(P)=X. */
+/* Jika tidak ada, mengirimkan Nil */
+/* Jika P adalah elemen pertama, maka Prec=Nil */
+/* Search dengan spesifikasi seperti ini menghindari */
+/* traversal ulang jika setelah Search akan dilakukan operasi lain */
+
+/*** Prekondisi untuk Max/Min : List tidak kosong ***/
+Address adrMax(List l);
+ElType max(List l){
+    return(INFO(adrMax(l)));
+}
+/* Mengirimkan nilai info(P) yang maksimum */
+Address adrMax(List l){
+    Address p= FIRST(l);
+    Address max= FIRST(l);
+    while(p!=NULL){
+        if(INFO(max) < INFO(p)){
+            max= p;
+        }
+        p= NEXT(p);
+    }
+    return max;
+}
+/* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
+Address adrMin(List l);
+ElType min(List l){
+    return (INFO(adrMin(l)));
+}
+/* Mengirimkan nilai info(P) yang minimum */
+Address adrMin(List l){
+    Address p= FIRST(l);
+    Address min= FIRST(l);
+    while(p!=NULL){
+        if(INFO(min) > INFO(p)){
+            min= p;
+        }
+        p= NEXT(p);
+    }
+    return min;
+}
+/* Mengirimkan address P, dengan info(P) yang bernilai minimum */
+
+/***************** FUNGSI dan PROSEDUR TAMBAHAN **************/
+void deleteAll(List *l){
+    ElType val;
+    while(!isEmpty(*l)){
+        deleteFirst(l, &val);
+    }
+}
+/* Delete semua elemen list dan alamat elemen di-dealokasi */
+
+void copyList(List *l1, List *l2){
+    CreateList(l2);
+    FIRST(*l2)=FIRST(*l1);
+}
+/* I.S. L1 sembarang. F.S. L2=L1 */
+/* L1 dan L2 "menunjuk" kepada list yang sama.*/
+/* Tidak ada alokasi/dealokasi elemen */
+
+void inverseList(List *l){
+    int list_len= length(*l);
+    for(int i= 0; i<list_len/2; i++){
+        ElType temp = getElmt(*l, i);
+        setElmt(l, i, getElmt(*l, list_len-i-1));
+        setElmt(l, list_len-i-1, temp);
+    }
+}
+/* I.S. sembarang. */
+/* F.S. elemen list dibalik : */
+/* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
+/* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
+
+void splitList(List *l1, List *l2, List l){
+    CreateList(l1);
+    CreateList(l2);
+    int list_len= length(l);
+    int i= 0;
+    while(i<list_len){
+        if(i<(list_len/2)){
+            insertLast(l1, getElmt(l, i));
+        }else{
+            insertLast(l2, getElmt(l, i));
+        }
+        i++;
+    }
+}
+/* I.S. l mungkin kosong */
+/* F.S. Berdasarkan L, dibentuk dua buah list l1 dan l2 */
+/* L tidak berubah: untuk membentuk l1 dan l2 harus alokasi */
+/* l1 berisi separuh elemen L dan l2 berisi sisa elemen L */
+/* Jika elemen L ganjil, maka separuh adalah length(L) div 2 */
