@@ -185,3 +185,36 @@ void displayList(List l){
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+
+
+void deleteRR(List * l, ElType tQ){
+    if(isEmpty(*l)){
+        printf("List Kosong\n");
+    }else{
+        ElType val;
+        deleteLast(l, &val);
+        if(val > tQ){
+            printf("%d\n", tQ);
+            val-=tQ;
+            insertFirst(l, val);
+        }else{
+            printf("%d\n", val);
+        }
+    }
+}
+
+float average(List l){
+    int sum= 0;
+    int count= 1;
+    float result= 0;
+    Address loc= FIRST(l);
+    while (NEXT(loc) != FIRST(l)){
+        sum+=INFO(loc);
+        count++;
+        loc= NEXT(loc);
+    }
+    sum+=INFO(loc);
+    // printf("%d", sum);
+    // printf(" %d\n", count);
+    return (float)(((float)sum)/((float)count));
+}

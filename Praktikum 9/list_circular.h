@@ -99,4 +99,8 @@ void displayList(List l);
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
+void deleteRR(List * l, ElType tQ);
+
+float average(List l);
+
 #endif
