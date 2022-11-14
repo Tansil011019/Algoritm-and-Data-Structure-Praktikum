@@ -87,6 +87,7 @@ void dequeue(Queue *q, ElType *x){
     }else{
         ADDR_HEAD(*q)= NEXT(p);
     }
+    NEXT(p)= NULL;
     free(p);    
 }
 /* Proses: Menghapus x pada bagian HEAD dari q dan mendealokasi elemen HEAD */
