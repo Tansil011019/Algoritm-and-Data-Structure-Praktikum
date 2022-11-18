@@ -3,7 +3,7 @@
 
 void displayListmain(List l){
     if(isOneElmt(l)){
-        printf("%d\n", INFO(l));
+        printf("%d", INFO(l));
     }else{
         printf("%d ", INFO(l));
         displayListmain(tail(l));
@@ -24,19 +24,19 @@ int main(){
     int length, point;
     scanf("%d %d", &length, &point);
     int count= 0;
-    int counter= 0;
-    List l;
-    l = NULL;
     while(count < length){
         if(length > count+point){
             List l2= get_input_in_order(point);
-            l= concat(l, l2);
+            displayListmain(l2);
             count+=point;
         }else{
             List l2= get_input_in_order(length-count);
-            l= concat(l, l2);
+            displayListmain(l2);
             count = length;
         }
+        if(count != length){
+            printf(" ");
+        }
     }
-    displayListmain(l);
+    printf("\n");
 }
