@@ -172,3 +172,45 @@ A
     E
 Note: Anda boleh membuat fungsi tambahan untuk membuat implementasi fungsi ini jika diperlukan
 */
+
+int rob1(BinTree root){
+    if(isTreeEmpty(root)){
+        return 0;
+    }else if(isOneElmt(root)){
+        return ROOT(root);
+    }else{
+        int p= rob1(LEFT(root));
+        int q= rob1(RIGHT(root));
+        if(p > q){
+            return p + ROOT(root);
+        }else{
+            return q + ROOT(root);
+        }
+    }
+}
+// Menerima sebuah ruangan rumah yang akan dirampok.
+// Mengembalikan hasil rampokan yang terbesar.
+
+int rob2(BinTree root){
+    if(isTreeEmpty(root)){
+        return 0;
+    }else if(isOneElmt(root)){
+        return ROOT(root);
+    }else{
+        int temp1 = ROOT(root);
+        if(!isTreeEmpty(LEFT(root))){
+            temp1 += (rob2(LEFT(LEFT(root))) + rob2(RIGHT(LEFT(root))));
+        }
+        if(!isTreeEmpty(RIGHT(root))){
+            temp1 += (rob2(LEFT(RIGHT(root))) + rob2(RIGHT(RIGHT(root))));
+        }
+        int temp2 = rob2(LEFT(root)) + rob2(RIGHT(root));
+        if(temp1 > temp2){
+            return temp1;
+        }else{
+            return temp2;
+        }
+    }
+}
+// Menerima sebuah ruangan rumah yang akan dirampok.
+// Mengembalikan hasil rampokan yang terbesar.
